@@ -7,31 +7,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-header {
-  background-color: #404040;
-  padding: 1rem;
-}
-
-header a {
-  color: #fff;
-  font-weight: bold;
-  text-decoration: none;
-  text-transform: uppercase;
+.site-container {
+  min-height: 100vh;
 }
 
 main {
-  padding: 1rem;
+  flex: 1;
+}
+
+.btn-primary {
+  background-color: #f0c040;
+  color: #000000;
 }
 
 .products {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-}
-
-.product {
-  border: 1px #404040 solid;
-  margin: 1rem;
 }
 
 .product img {
@@ -50,4 +42,8 @@ main {
 
 .product-link:hover {
   text-decoration: underline;
+}
+
+.rating span {
+  color: #ffc000;
 }
