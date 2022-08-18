@@ -1,10 +1,12 @@
-import { useEffect, useReducer, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useReducer } from "react";
 import axios from "axios";
 import logger from "use-reducer-logger";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Product from "../components/Product";
+import { Helmet } from "react-helmet-async";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -25,7 +27,6 @@ function HomeScreen() {
     loading: true,
     error: "",
   });
-  // const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -35,18 +36,20 @@ function HomeScreen() {
       } catch (error) {
         dispatch({ type: "FETCH_FAILED", payload: error.message });
       }
-      // setProducts(result.data);
     };
     fetchData();
   }, []);
   return (
-    <>
+    <div>
+      <Helmet>
+        <title>Undercut</title>
+      </Helmet>
       <h1>List products</h1>
       <div className="products">
         {loading ? (
-          <div>Loading...</div>
+          <LoadingBox />
         ) : error ? (
-          <div>{error}</div>
+          <MessageBox varinat="danger">{error}</MessageBox>
         ) : (
           <Row className="mt-3">
             {products.map((product) => (
@@ -57,7 +60,7 @@ function HomeScreen() {
           </Row>
         )}
       </div>
-    </>
+    </div>
   );
 }
 
