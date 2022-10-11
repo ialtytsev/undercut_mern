@@ -25,7 +25,7 @@ import Button from "react-bootstrap/Button";
 import { useEffect } from "react";
 import { getError } from "./utils";
 import axios from "axios";
-import SearchBox from "./SearchBox";
+import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardScreen from "./screens/DashboardScreen";
@@ -33,6 +33,8 @@ import AdminRoute from "./components/AdminRoute";
 import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
+import UserListScreen from "./screens/UserListScreen";
+import UserEditScreen from "./screens/UserEditScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -223,6 +225,14 @@ function App() {
                 }
               />
               <Route
+                path="/admin/users"
+                element={
+                  <AdminRoute>
+                    <UserListScreen />
+                  </AdminRoute>
+                }
+              />
+              <Route
                 path="/admin/products"
                 element={
                   <AdminRoute>
@@ -238,6 +248,15 @@ function App() {
                   </AdminRoute>
                 }
               />
+              <Route
+                path="/admin/user/:id"
+                element={
+                  <AdminRoute>
+                    <UserEditScreen />
+                  </AdminRoute>
+                }
+              />
+
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>
